@@ -26,7 +26,7 @@ namespace Catel.Examples.UWP.SavableModel.ViewModels
                 {
                     using (var stream = await _storagefile.OpenAsync(FileAccessMode.ReadWrite))
                     {
-                        Person.Save(stream: stream.AsStream(), serializer: _serializer);
+                        Person.Save(stream, _serializer);
                     }
                 },
                 () => Person != null && Person.IsDirty);
@@ -44,7 +44,7 @@ namespace Catel.Examples.UWP.SavableModel.ViewModels
             {
                 try
                 {
-                    Person = Person.Load(stream: stream.AsStream(), serializer: _serializer);
+                    Person = Person.Load(stream, _serializer);
                 }
                 catch
                 {
