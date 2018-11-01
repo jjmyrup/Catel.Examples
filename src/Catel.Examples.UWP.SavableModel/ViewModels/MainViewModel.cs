@@ -19,6 +19,8 @@ namespace Catel.Examples.UWP.SavableModel.ViewModels
 
         public MainViewModel(ISerializer serializer)
         {
+            Argument.IsNotNull(() => serializer);
+
             _serializer = serializer;
 
             SaveCommand = new TaskCommand(
