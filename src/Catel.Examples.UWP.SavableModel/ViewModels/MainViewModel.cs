@@ -15,6 +15,7 @@ namespace Catel.Examples.UWP.SavableModel.ViewModels
         private readonly ISerializer _serializer;
         private StorageFile _storagefile;
 
+        public string StorageFilePath { get; private set; }
         public TaskCommand SaveCommand { get; private set; }
 
         public MainViewModel(ISerializer serializer)
@@ -26,9 +27,16 @@ namespace Catel.Examples.UWP.SavableModel.ViewModels
             SaveCommand = new TaskCommand(
                 async () =>
                 {
-                    using (var stream = await _storagefile.OpenAsync(FileAccessMode.ReadWrite))
+                    try
                     {
-                        Person.Save(stream, _serializer);
+                        using (var stream = await _storagefile.OpenAsync(FileAccessMode.ReadWrite))
+                        {
+                            Person.Save(stream, serializer: _serializer);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Status = ex.ToString();
                     }
                 },
                 () => Person != null && Person.IsDirty);
@@ -36,22 +44,26 @@ namespace Catel.Examples.UWP.SavableModel.ViewModels
 
         protected override async Task InitializeAsync()
         {
-            StorageFolder storageFolder =
+            try
+            {
+                StorageFolder storageFolder =
                 ApplicationData.Current.LocalFolder;
 
-            _storagefile =
-                await storageFolder.CreateFileAsync("person", CreationCollisionOption.OpenIfExists);
+                _storagefile =
+                    await storageFolder.CreateFileAsync("person", CreationCollisionOption.OpenIfExists);
 
-            using (var stream = await _storagefile.OpenAsync(FileAccessMode.Read))
+                StorageFilePath = _storagefile.Path;
+
+                using (var stream = await _storagefile.OpenAsync(FileAccessMode.Read))
+                {
+                        Person = Person.Load(stream, serializer: _serializer);
+                }
+            }
+            catch (Exception ex)
             {
-                try
-                {
-                    Person = Person.Load(stream, _serializer);
-                }
-                catch
-                {
-                    Person = new Person();
-                }
+                Person = new Person();
+
+                Status = ex.ToString();
             }
         }
 
@@ -60,5 +72,6 @@ namespace Catel.Examples.UWP.SavableModel.ViewModels
         [Expose("MiddleName", IsReadOnly = false)]
         [Expose("LastName", IsReadOnly = false)]
         public Person Person { get; set; }
+        public string Status { get; private set; }
     }
 }
