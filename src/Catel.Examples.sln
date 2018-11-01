@@ -67,6 +67,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catel.Examples.XF.MasterDet
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catel.Examples.XF.MasterDetail.iOS", "Catel.Examples.XF.MasterDetail.iOS\Catel.Examples.XF.MasterDetail.iOS.csproj", "{DF979DCD-FC21-4CE1-8621-49F15C107DDC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catel.Examples.UWP.SavableModel", "Catel.Examples.UWP.SavableModel\Catel.Examples.UWP.SavableModel.csproj", "{C3766007-70D0-433F-B973-7F4FD6BDCDD3}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Catel.Examples.XF.MasterDetail\Catel.Examples.XF.MasterDetail.projitems*{829fd97e-89b8-4076-8122-05c963de1a5f}*SharedItemsImports = 4
@@ -507,6 +509,7 @@ Global
 		{9C2D1166-BF34-40E7-8F71-064DB7882D8B} = {C449C35E-1F93-4146-A64C-56B477341FE8}
 		{829FD97E-89B8-4076-8122-05C963DE1A5F} = {92D3DB7B-8108-4715-A1C0-48E43046CD7A}
 		{DF979DCD-FC21-4CE1-8621-49F15C107DDC} = {92D3DB7B-8108-4715-A1C0-48E43046CD7A}
+		{C3766007-70D0-433F-B973-7F4FD6BDCDD3} = {C449C35E-1F93-4146-A64C-56B477341FE8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C1E475A3-BD72-4942-B0D8-AF1E1C23728E}
